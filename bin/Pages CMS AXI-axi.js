@@ -1,5 +1,12 @@
 #!/usr/bin/env node
-import { VERSION } from "../src/version.ts";
+import { existsSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+
+const sourceCli = new URL("../src/cli.ts", import.meta.url);
+const runningFromCheckout = existsSync(fileURLToPath(sourceCli));
+const runtimeDirectory = runningFromCheckout ? "src" : "dist";
+const runtimeExtension = runningFromCheckout ? ".ts" : ".js";
+const { VERSION } = await import(new URL(`../${runtimeDirectory}/version${runtimeExtension}`, import.meta.url));
 
 const versionFlags = new Set(["-v", "-V", "--version", "--v"]);
 const validFlags = ["-h", "--help", "-v", "-V", "--version", "--v"];
@@ -16,6 +23,6 @@ if (args[0]?.startsWith("-") && !validFlags.includes(args[0])) {
   );
   process.exitCode = 2;
 } else {
-  const { main } = await import("../src/cli.js");
+  const { main } = await import(new URL(`../${runtimeDirectory}/cli${runtimeExtension}`, import.meta.url));
   await main();
 }
