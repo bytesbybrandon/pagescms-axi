@@ -1,6 +1,6 @@
 # Pages CMS AXI npm CI and Release
 
-Status: Implemented, pending local verification.
+Status: Implemented and bootstrapped on npm.
 
 Package: `pagescms-axi`.
 
@@ -24,18 +24,24 @@ The workflow reruns CI, packs and checks the exact tarball, and publishes with n
 
 The workflow has `id-token: write` only in the publish job and uses no long-lived npm token.
 
-Configure npm trusted publishing for `bytesbybrandon/pagescms-axi` and `npm-publish.yml` after the package exists.
+npm trusted publishing is configured for `bytesbybrandon/pagescms-axi` and `npm-publish.yml` with direct publishing allowed.
 
-Enable direct `npm publish` as an allowed action in the trusted publisher settings.
+The trusted publisher permits direct `npm publish` for this workflow.
 
 ## First publication
 
-The first version must be published manually after the local package check and separate release approval.
+The user manually published `pagescms-axi@0.1.0` on 2026-09-28 after local package verification and release approval.
 
-Use interactive npm account authentication with 2FA and do not create a long-lived publish token.
+The npm `beta` and `latest` dist-tags currently both point to `0.1.0`.
 
-After the package exists, configure trusted publishing before creating later GitHub Releases.
+The bootstrap used interactive npm account authentication with 2FA and no long-lived publish token.
+
+Trusted publishing is configured before later GitHub Releases.
 
 OIDC publishes from this public repository to a public npm package receive automatic provenance attestations.
 
-The current repository is public, and no npm release has been approved in this plan.
+The repository and npm package are public.
+
+The manually published bootstrap version does not have an OIDC provenance attestation.
+
+The next automated release must use a package version that has not already been published to npm.
