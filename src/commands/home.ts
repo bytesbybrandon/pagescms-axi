@@ -1,7 +1,7 @@
-import { type PagesContext } from "../context.ts";
+import { type PagesContext, resolvePagesContext } from "../context.ts";
 import { loadConfiguration } from "../pages.ts";
 
-export async function home(_args: string[], context: PagesContext) {
+export async function home(_args: string[], context: PagesContext = resolvePagesContext(_args)) {
   if (context.repositoryError) {
     return {
       service: "Pages CMS",

@@ -5,7 +5,7 @@ function problem(code: string, error: string, help: string[] = []) {
   return { error, code, ...(help.length ? { help } : {}) };
 }
 
-export async function configCommand(args: string[], inherited: PagesContext) {
+export async function configCommand(args: string[], inherited?: PagesContext) {
   const parsed = parseArguments(args);
   if (parsed.error) return problem("INVALID_ARGUMENT", parsed.error);
   if (parsed.positional.length > 1 || (parsed.positional[0] && parsed.positional[0] !== "show")) {
@@ -28,7 +28,7 @@ export async function configCommand(args: string[], inherited: PagesContext) {
   };
 }
 
-export async function collectionCommand(args: string[], inherited: PagesContext) {
+export async function collectionCommand(args: string[], inherited?: PagesContext) {
   const parsed = parseArguments(args);
   if (parsed.error) return problem("INVALID_ARGUMENT", parsed.error);
   const [action] = parsed.positional;

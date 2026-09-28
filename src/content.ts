@@ -140,7 +140,9 @@ function serializeEntry(data: unknown, path: string, definition: ContentDefiniti
   if (format === "json" || extension === "json") return `${JSON.stringify(data, null, 2)}\n`;
   if (format === "yaml" || extension === "yaml" || extension === "yml") return stringifyYaml(data);
   if (format === "raw" || format === "code" || format === "datagrid") {
-    if (typeof data.content === "string") return data.content;
+    if (data && typeof data === "object" && !Array.isArray(data) && typeof (data as ContentRecord).content === "string") {
+      return (data as ContentRecord).content as string;
+    }
     return null;
   }
 
@@ -257,7 +259,7 @@ export async function listContentEntries(context: PagesContext, collectionName: 
   };
 }
 
-export async function contentCommand(args: string[], inherited: PagesContext) {
+export async function contentCommand(args: string[], inherited?: PagesContext) {
   const parsed = parseArguments(args);
   if (parsed.error) return problem("INVALID_ARGUMENT", parsed.error);
   const context = resolvePagesContext(args, inherited);

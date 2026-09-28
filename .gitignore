@@ -1,6 +1,11 @@
 node_modules/
+coverage/
+.cache/
+.npm/
 .env
 .env.*
 !.env.example
 dist/
 .reactive/
+*.tgz
+*.tsbuildinfo
