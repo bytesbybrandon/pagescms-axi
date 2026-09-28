@@ -1,0 +1,22 @@
+{
+  "name": "pagescms-axi",
+  "version": "0.1.0",
+  "description": "Agent-facing AXI for Pages CMS repositories",
+  "scripts": {
+    "axi": "node \"./bin/Pages CMS AXI-axi.js\"",
+    "build:skill": "node ./scripts/build-skill.ts"
+  },
+  "keywords": [],
+  "type": "module",
+  "bin": {
+    "pagescms-axi": "./bin/Pages CMS AXI-axi.js"
+  },
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "dependencies": {
+    "@toon-format/toon": "^4.1.1",
+    "axi-sdk-js": "^0.1.12",
+    "yaml": "^2.9.1"
+  }
+}
